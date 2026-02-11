@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Gopher&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sanscripf&display=swap");
+@import "tailwindcss";
+
+/* Global styles */
+body {
+  font-family: "Gopher", sans-serif;
+  background-color: rgb(251, 246, 241);
+  color: rgb(34, 54, 20);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
