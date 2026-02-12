@@ -112,21 +112,22 @@ export default function ContactSection() {
               required
               placeholder=" "
               className="peer w-full border-b-2 border-primaryText/40 
-                         bg-transparent py-3 outline-none"
+               bg-transparent py-3 outline-none"
             />
             <label
-              className="absolute left-0 top-3 text-sm opacity-70 
-                         transition-all duration-300
-                         peer-placeholder-shown:top-3
-                         peer-placeholder-shown:text-sm
-                         peer-focus:-top-4
-                         peer-focus:text-xs
-                         peer-valid:-top-4
-                         peer-valid:text-xs"
+              className="
+      absolute left-0 top-3 text-sm opacity-70
+      transition-all duration-300
+      peer-focus:-top-4
+      peer-focus:text-xs
+      peer-not-placeholder-shown:-top-4
+      peer-not-placeholder-shown:text-xs
+    "
             >
               Your Email
             </label>
           </div>
+
 
           {/* Phone */}
           <div className="relative">
