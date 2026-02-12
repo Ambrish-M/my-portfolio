@@ -6,8 +6,17 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-20 gap-10 bg-primaryBg"
+      className="
+  min-h-screen
+  flex flex-col-reverse md:flex-row
+  items-center justify-center md:justify-between
+  px-6 md:px-20
+  gap-6 md:gap-16
+  pt-24 md:pt-0
+  bg-primaryBg
+  "
     >
+
       {/* Text Content */}
       <motion.div
         initial={{ opacity: 0, x: -50 }}

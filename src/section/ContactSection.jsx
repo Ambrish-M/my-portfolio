@@ -1,7 +1,25 @@
-import { motion } from "framer-motion";
-import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker } from "react-icons/hi";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import {
+  HiOutlineMail,
+  HiOutlinePhone,
+  HiOutlineLocationMarker,
+} from "react-icons/hi";
 
 export default function ContactSection() {
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSent(true);
+
+    setTimeout(() => {
+      setSent(false);
+    }, 3000);
+
+    e.target.reset();
+  };
+
   return (
     <section
       id="contact"
@@ -19,8 +37,7 @@ export default function ContactSection() {
       </motion.h2>
 
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-
-        {/* Left Side - Info */}
+        {/* Left Side */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -29,11 +46,11 @@ export default function ContactSection() {
           className="space-y-8"
         >
           <p className="font-sanscripf text-lg leading-relaxed">
-            I’m currently open to internship and entry-level MERN stack opportunities.
-            If you’d like to collaborate or discuss a project, feel free to reach out.
+            I’m currently open to internship and entry-level MERN stack
+            opportunities. If you'd like to collaborate or discuss a project,
+            feel free to reach out.
           </p>
 
-          {/* Email */}
           <a
             href="mailto:ambrish2706@gmail.com"
             className="flex items-center gap-3 text-lg hover:opacity-70 transition"
@@ -42,16 +59,14 @@ export default function ContactSection() {
             ambrish2706@gmail.com
           </a>
 
-          {/* Phone */}
           <a
-            href="tel:+919876543210"
+            href="tel:+918610422260"
             className="flex items-center gap-3 text-lg hover:opacity-70 transition"
           >
             <HiOutlinePhone size={22} />
             +91 8610422260
           </a>
 
-          {/* Location */}
           <div className="flex items-center gap-3 text-lg opacity-80">
             <HiOutlineLocationMarker size={22} />
             Tamil Nadu, India
@@ -60,6 +75,7 @@ export default function ContactSection() {
 
         {/* Right Side - Form */}
         <motion.form
+          onSubmit={handleSubmit}
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
@@ -77,11 +93,13 @@ export default function ContactSection() {
             />
             <label
               className="absolute left-0 top-3 text-sm opacity-70 
-                         transition-all duration-300 
-                         peer-placeholder-shown:top-3 
-                         peer-placeholder-shown:text-sm 
-                         peer-focus:-top-4 
-                         peer-focus:text-xs"
+                         transition-all duration-300
+                         peer-placeholder-shown:top-3
+                         peer-placeholder-shown:text-sm
+                         peer-focus:-top-4
+                         peer-focus:text-xs
+                         peer-valid:-top-4
+                         peer-valid:text-xs"
             >
               Your Name
             </label>
@@ -98,17 +116,19 @@ export default function ContactSection() {
             />
             <label
               className="absolute left-0 top-3 text-sm opacity-70 
-                         transition-all duration-300 
-                         peer-placeholder-shown:top-3 
-                         peer-placeholder-shown:text-sm 
-                         peer-focus:-top-4 
-                         peer-focus:text-xs"
+                         transition-all duration-300
+                         peer-placeholder-shown:top-3
+                         peer-placeholder-shown:text-sm
+                         peer-focus:-top-4
+                         peer-focus:text-xs
+                         peer-valid:-top-4
+                         peer-valid:text-xs"
             >
               Your Email
             </label>
           </div>
 
-          {/* Phone Field */}
+          {/* Phone */}
           <div className="relative">
             <input
               type="tel"
@@ -119,11 +139,13 @@ export default function ContactSection() {
             />
             <label
               className="absolute left-0 top-3 text-sm opacity-70 
-                         transition-all duration-300 
-                         peer-placeholder-shown:top-3 
-                         peer-placeholder-shown:text-sm 
-                         peer-focus:-top-4 
-                         peer-focus:text-xs"
+                         transition-all duration-300
+                         peer-placeholder-shown:top-3
+                         peer-placeholder-shown:text-sm
+                         peer-focus:-top-4
+                         peer-focus:text-xs
+                         peer-valid:-top-4
+                         peer-valid:text-xs"
             >
               Your Phone
             </label>
@@ -140,17 +162,19 @@ export default function ContactSection() {
             ></textarea>
             <label
               className="absolute left-0 top-3 text-sm opacity-70 
-                         transition-all duration-300 
-                         peer-placeholder-shown:top-3 
-                         peer-placeholder-shown:text-sm 
-                         peer-focus:-top-4 
-                         peer-focus:text-xs"
+                         transition-all duration-300
+                         peer-placeholder-shown:top-3
+                         peer-placeholder-shown:text-sm
+                         peer-focus:-top-4
+                         peer-focus:text-xs
+                         peer-valid:-top-4
+                         peer-valid:text-xs"
             >
               Your Message
             </label>
           </div>
 
-          {/* Submit Button */}
+          {/* Button */}
           <button
             type="submit"
             className="px-8 py-3 bg-primaryText text-primaryBg 
@@ -160,6 +184,21 @@ export default function ContactSection() {
           >
             Send Message
           </button>
+
+          {/* Success Message */}
+          <AnimatePresence>
+            {sent && (
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                className="text-green-600 text-sm font-medium mt-2"
+              >
+                ✅ Your message was sent successfully!
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.form>
       </div>
     </section>
