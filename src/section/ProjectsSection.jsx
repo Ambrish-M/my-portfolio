@@ -127,11 +127,11 @@ export default function ProjectsSection() {
             className="group relative bg-[oklch(13%_0.03_264/0.9)] backdrop-blur-md border border-[oklch(80%_0.18_195/0.15)] hover:border-[oklch(80%_0.18_195/0.5)] transition-all duration-400 overflow-hidden"
             style={{
               clipPath: 'polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))',
-              boxShadow: '0 0 0 oklch(80% 0.18 195 / 0)',
             }}
           >
             {/* Hover glow effect */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
               style={{ background: 'radial-gradient(ellipse at top, oklch(80% 0.18 195 / 0.05), transparent 60%)' }}
             />
 
@@ -152,46 +152,55 @@ export default function ProjectsSection() {
                 alt={project.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              {/* Image overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-[oklch(13%_0.03_264)] via-transparent to-transparent" />
-              {/* Scan lines on image */}
               <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_3px,oklch(0%_0_0/0.05)_3px,oklch(0%_0_0/0.05)_4px)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
 
             {/* Content */}
-            <div className="p-5 flex flex-col h-[240px]">
+            <div className="p-5 flex flex-col gap-4">
+
               {/* Project name */}
               <h3
-                className="font-bold mb-2 text-[oklch(95%_0.01_264)] group-hover:text-[oklch(80%_0.18_195)] transition-colors duration-300"
+                className="font-bold text-[oklch(95%_0.01_264)] group-hover:text-[oklch(80%_0.18_195)] transition-colors duration-300"
                 style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '0.8rem', letterSpacing: '0.05em' }}
               >
                 {project.name}
               </h3>
 
-              <p className="text-sm text-[oklch(60%_0.02_264)] mb-4 leading-relaxed flex-shrink-0" style={{ fontFamily: 'Rajdhani, sans-serif' }}>
+              {/* Description */}
+              <p
+                className="text-sm text-[oklch(60%_0.02_264)] leading-relaxed"
+                style={{ fontFamily: 'Rajdhani, sans-serif' }}
+              >
                 {project.description}
               </p>
 
-              {/* Tech Stack */}
-              <div className="flex flex-wrap gap-1.5 mb-4 flex-1">
+              {/* Tech Stack — centered inside a single bordered box */}
+              <div
+                className="flex flex-wrap justify-center items-center gap-1.5 py-3 px-2 border border-[oklch(80%_0.18_195/0.2)] bg-[oklch(80%_0.18_195/0.03)]"
+                style={{ clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))' }}
+              >
                 {project.tech.slice(0, 4).map((tech, i) => (
                   <span
                     key={i}
-                    className="px-2 py-0.5 text-xs text-[oklch(80%_0.18_195)] border border-[oklch(80%_0.18_195/0.2)] bg-[oklch(80%_0.18_195/0.05)]"
-                    style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: '0.6rem' }}
+                    className="text-[oklch(80%_0.18_195)] bg-[oklch(80%_0.18_195/0.08)] px-2 py-0.5 rounded-sm"
+                    style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: '0.6rem', letterSpacing: '0.05em' }}
                   >
                     {tech}
                   </span>
                 ))}
                 {project.tech.length > 4 && (
-                  <span className="px-2 py-0.5 text-xs text-[oklch(50%_0.02_264)]" style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: '0.6rem' }}>
+                  <span
+                    className="text-[oklch(50%_0.02_264)]"
+                    style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: '0.6rem' }}
+                  >
                     +{project.tech.length - 4}
                   </span>
                 )}
               </div>
 
               {/* Buttons */}
-              <div className="flex items-center justify-between mt-auto">
+              <div className="flex items-center justify-between">
                 <a
                   href={project.live}
                   target="_blank"
