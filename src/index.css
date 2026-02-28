@@ -1,12 +1,271 @@
-@import url("https://fonts.googleapis.com/css2?family=Gopher&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Sanscripf&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
 @import "tailwindcss";
 
+@theme {
+  /* Futuristic color palette */
+  --color-bg-primary: oklch(8% 0.02 264);
+  --color-bg-secondary: oklch(11% 0.025 264);
+  --color-bg-card: oklch(13% 0.03 264);
+
+  --color-neon-cyan: oklch(80% 0.18 195);
+  --color-neon-purple: oklch(65% 0.22 290);
+  --color-neon-pink: oklch(65% 0.22 330);
+  --color-neon-green: oklch(75% 0.2 145);
+
+  --color-text-primary: oklch(95% 0.01 264);
+  --color-text-muted: oklch(60% 0.02 264);
+  --color-border-glow: oklch(80% 0.18 195);
+
+  /* Fonts */
+  --font-orbitron: "Orbitron", sans-serif;
+  --font-rajdhani: "Rajdhani", sans-serif;
+  --font-mono: "Share Tech Mono", monospace;
+
+  /* Animations */
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+  --animate-scan-line: scan-line 3s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-flicker: flicker 4s linear infinite;
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px oklch(80% 0.18 195)); }
+    50% { opacity: 0.7; filter: drop-shadow(0 0 20px oklch(80% 0.18 195)); }
+  }
+
+  @keyframes scan-line {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes flicker {
+    0%, 95%, 100% { opacity: 1; }
+    96% { opacity: 0.8; }
+    97% { opacity: 1; }
+    98% { opacity: 0.6; }
+    99% { opacity: 1; }
+  }
+
+  @keyframes grid-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
+  }
+
+  @keyframes border-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes text-glow {
+    0%, 100% { text-shadow: 0 0 10px oklch(80% 0.18 195), 0 0 20px oklch(80% 0.18 195); }
+    50% { text-shadow: 0 0 20px oklch(80% 0.18 195), 0 0 40px oklch(80% 0.18 195), 0 0 60px oklch(80% 0.18 195); }
+  }
+
+  @keyframes data-stream {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100px); opacity: 0; }
+  }
+}
+
+/* Custom utilities */
+@utility neon-text {
+  color: oklch(80% 0.18 195);
+  text-shadow: 0 0 10px oklch(80% 0.18 195), 0 0 20px oklch(80% 0.18 195), 0 0 40px oklch(80% 0.18 195);
+}
+
+@utility neon-text-purple {
+  color: oklch(65% 0.22 290);
+  text-shadow: 0 0 10px oklch(65% 0.22 290), 0 0 20px oklch(65% 0.22 290);
+}
+
+@utility neon-border {
+  border-color: oklch(80% 0.18 195);
+  box-shadow: 0 0 10px oklch(80% 0.18 195 / 0.4), inset 0 0 10px oklch(80% 0.18 195 / 0.05);
+}
+
+@utility neon-border-purple {
+  border-color: oklch(65% 0.22 290);
+  box-shadow: 0 0 10px oklch(65% 0.22 290 / 0.4), inset 0 0 10px oklch(65% 0.22 290 / 0.05);
+}
+
+@utility glass-card {
+  background: oklch(13% 0.03 264 / 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid oklch(80% 0.18 195 / 0.2);
+  box-shadow: 0 0 20px oklch(80% 0.18 195 / 0.05), inset 0 0 20px oklch(80% 0.18 195 / 0.02);
+}
+
+@utility cyber-grid {
+  background-image:
+    linear-gradient(oklch(80% 0.18 195 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(80% 0.18 195 / 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: grid-move 8s linear infinite;
+}
+
+@utility clip-corner {
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+
+@utility clip-corner-sm {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
 /* Global styles */
-body {
-  font-family: "Gopher", sans-serif;
-  background-color: rgb(251, 246, 241);
-  color: rgb(34, 54, 20);
+* {
+  box-sizing: border-box;
+}
+
+html {
   scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Rajdhani", sans-serif;
+  background-color: oklch(8% 0.02 264);
+  color: oklch(95% 0.01 264);
   overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(8% 0.02 264);
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(80% 0.18 195 / 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(80% 0.18 195);
+}
+
+/* Selection */
+::selection {
+  background: oklch(80% 0.18 195 / 0.3);
+  color: oklch(95% 0.01 264);
+}
+
+/* Glowing line separator */
+.glow-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, oklch(80% 0.18 195), transparent);
+  box-shadow: 0 0 10px oklch(80% 0.18 195);
+}
+
+/* Scan line overlay */
+.scan-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    oklch(0% 0 0 / 0.03) 2px,
+    oklch(0% 0 0 / 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Neon button */
+.btn-neon {
+  position: relative;
+  background: transparent;
+  border: 1px solid oklch(80% 0.18 195);
+  color: oklch(80% 0.18 195);
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.btn-neon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: oklch(80% 0.18 195 / 0);
+  transition: background 0.3s ease;
+}
+
+.btn-neon:hover {
+  color: oklch(8% 0.02 264);
+  box-shadow: 0 0 20px oklch(80% 0.18 195 / 0.6), 0 0 40px oklch(80% 0.18 195 / 0.3);
+}
+
+.btn-neon:hover::before {
+  background: oklch(80% 0.18 195);
+}
+
+.btn-neon span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Solid neon button */
+.btn-neon-solid {
+  position: relative;
+  background: oklch(80% 0.18 195);
+  border: 1px solid oklch(80% 0.18 195);
+  color: oklch(8% 0.02 264);
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: all 0.3s ease;
+  font-weight: 700;
+}
+
+.btn-neon-solid:hover {
+  box-shadow: 0 0 20px oklch(80% 0.18 195 / 0.8), 0 0 40px oklch(80% 0.18 195 / 0.4);
+  transform: translateY(-2px);
+}
+
+/* Section heading style */
+.section-title {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Futuristic input */
+.cyber-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid oklch(80% 0.18 195 / 0.4);
+  color: oklch(95% 0.01 264);
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1rem;
+  padding: 0.75rem 0;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.cyber-input:focus {
+  border-bottom-color: oklch(80% 0.18 195);
+  box-shadow: 0 2px 0 oklch(80% 0.18 195 / 0.3);
+}
+
+.cyber-input::placeholder {
+  color: oklch(60% 0.02 264);
 }
